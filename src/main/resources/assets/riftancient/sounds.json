@@ -1,0 +1,11 @@
+{
+  "aethel_ambient": {
+    "sounds": [
+      {
+        "name": "riftancient:aethel_ambient",
+        "stream": true,
+        "attenuation_distance": 24
+      }
+    ]
+  }
+}

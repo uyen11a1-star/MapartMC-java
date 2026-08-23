@@ -10,7 +10,7 @@
     "grass_color": 5380912,
     "foliage_color": 6439184,
     "mood_sound": {
-      "sound": "minecraft:ambient.basalt_deltas.mood",
+      "sound": "riftancient:aethel_ambient",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2.0
@@ -51,7 +51,7 @@
         "maxCount": 2
       },
       {
-        "type": "minecraft:endermite",
+        "type": "riftancient:rift_stalker",
         "weight": 15,
         "minCount": 1,
         "maxCount": 3

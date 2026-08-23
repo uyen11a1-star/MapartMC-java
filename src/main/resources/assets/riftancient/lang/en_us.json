@@ -20,5 +20,8 @@
   "item.riftancient.aetherite_axe": "Aetherite Axe",
   "item.riftancient.aetherite_shovel": "Aetherite Shovel",
   "item.riftancient.aetherite_hoe": "Aetherite Hoe",
-  "dimension.riftancient.aethel_ruinium": "Aethel-Ruinium"
+  "dimension.riftancient.aethel_ruinium": "Aethel-Ruinium",
+  "entity.riftancient.vorath": "Vorath, the Sleeping Ruin",
+  "entity.riftancient.rift_stalker": "Rift Stalker",
+  "entity.riftancient.ashen_sentinel": "Ashen Sentinel"
 }

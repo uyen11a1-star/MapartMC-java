@@ -3,6 +3,7 @@ package io.riftancient.world;
 import io.riftancient.block.RiftBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public final class RuinGenerator {
@@ -10,9 +11,15 @@ public final class RuinGenerator {
 
     public static void ensureTemple(ServerLevel level) {
         BlockPos spawn = level.getRespawnData().pos();
-        BlockPos center = new BlockPos(spawn.getX(), Math.max(70, spawn.getY()), spawn.getZ());
+        int baseY = Math.max(5, spawn.getY());
+        BlockPos center = new BlockPos(spawn.getX(), baseY, spawn.getZ());
         if (!level.getBlockState(center).isAir() && !level.getBlockState(center).is(RiftBlocks.TEMPLE_ALTAR)) return;
         buildTemple(level, center);
+        buildObelisk(level, center.offset(28, 7, -18), 9);
+        buildObelisk(level, center.offset(-31, 3, 24), 7);
+        buildFallenArch(level, center.offset(24, 0, 27));
+        buildFallenArch(level, center.offset(-26, 0, -28));
+        buildAetheriteShrine(level, center.offset(0, 9, 42));
     }
 
     public static void buildTemple(ServerLevel level, BlockPos center) {
@@ -49,5 +56,40 @@ public final class RuinGenerator {
         }
         level.setBlock(center.offset(0, 5, -7), Blocks.GLOWSTONE.defaultBlockState(), 3);
         level.setBlock(center.offset(0, 5, 7), Blocks.GLOWSTONE.defaultBlockState(), 3);
+    }
+
+    private static void buildObelisk(ServerLevel level, BlockPos base, int height) {
+        for (int x = -2; x <= 2; x++) for (int z = -2; z <= 2; z++) {
+            if (Math.abs(x) + Math.abs(z) <= 3) level.setBlock(base.offset(x, -1, z), RiftBlocks.RUNIC_BRICKS.defaultBlockState(), 3);
+        }
+        for (int y = 0; y < height; y++) {
+            Block block = y == height - 1 ? RiftBlocks.AETHERITE_BLOCK : RiftBlocks.ANCIENT_RIFTSTONE;
+            level.setBlock(base.above(y), block.defaultBlockState(), 3);
+            if (y > 1 && y % 2 == 0) {
+                level.setBlock(base.offset(1, y, 0), RiftBlocks.RUNIC_BRICKS.defaultBlockState(), 3);
+                level.setBlock(base.offset(-1, y, 0), RiftBlocks.RUNIC_BRICKS.defaultBlockState(), 3);
+            }
+        }
+    }
+
+    private static void buildFallenArch(ServerLevel level, BlockPos base) {
+        for (int x = -5; x <= 5; x++) {
+            int height = 2 + (int) Math.round(3.5D - Math.abs(x) * .55D);
+            for (int y = 0; y <= height; y++) {
+                if (y == height || Math.abs(x) == 5) level.setBlock(base.offset(x, y, 0), RiftBlocks.ANCIENT_RIFTSTONE.defaultBlockState(), 3);
+            }
+        }
+        level.setBlock(base.offset(0, 1, 0), RiftBlocks.AETHERITE_BLOCK.defaultBlockState(), 3);
+    }
+
+    private static void buildAetheriteShrine(ServerLevel level, BlockPos base) {
+        for (int x = -4; x <= 4; x++) for (int z = -4; z <= 4; z++) {
+            if (Math.abs(x) + Math.abs(z) <= 5) level.setBlock(base.offset(x, -1, z), RiftBlocks.RUNIC_BRICKS.defaultBlockState(), 3);
+        }
+        for (int x = -2; x <= 2; x++) for (int z = -2; z <= 2; z++) {
+            if (Math.abs(x) == 2 || Math.abs(z) == 2) level.setBlock(base.offset(x, 0, z), RiftBlocks.ANCIENT_RIFTSTONE.defaultBlockState(), 3);
+        }
+        level.setBlock(base, RiftBlocks.AETHERITE_BLOCK.defaultBlockState(), 3);
+        level.setBlock(base.above(), RiftBlocks.TEMPLE_ALTAR.defaultBlockState(), 3);
     }
 }

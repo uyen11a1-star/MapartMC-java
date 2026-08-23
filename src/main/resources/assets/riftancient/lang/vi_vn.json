@@ -12,5 +12,8 @@
   "item.riftancient.dawnwake_blade": "Dawnwake Blade",
   "item.riftancient.ruin_heart": "Tr\u00e1i Tim T\u00e0n T\u00edch",
   "item.riftancient.severance": "Severance",
-  "dimension.riftancient.aethel_ruinium": "Aethel-Ruinium"
+  "dimension.riftancient.aethel_ruinium": "Aethel-Ruinium",
+  "entity.riftancient.vorath": "Vorath, Tàn Tích Ngủ Quên",
+  "entity.riftancient.rift_stalker": "Kẻ Rình Khe Nứt",
+  "entity.riftancient.ashen_sentinel": "Vệ Binh Tro Tàn"
 }

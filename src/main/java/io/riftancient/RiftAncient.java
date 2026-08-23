@@ -2,6 +2,9 @@ package io.riftancient;
 
 import io.riftancient.block.RiftBlocks;
 import io.riftancient.block.RiftPortalBlock;
+import io.riftancient.entity.RiftEntities;
+import io.riftancient.entity.RiftStalkerEntity;
+import io.riftancient.entity.VorathEntity;
 import io.riftancient.item.RiftSeveranceItem;
 import io.riftancient.world.RuinGenerator;
 import net.fabricmc.api.ModInitializer;
@@ -24,7 +27,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntitySpawnReason;
 
-import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.EquipmentSlot;
 
 import net.minecraft.world.item.Item;
@@ -72,6 +74,8 @@ public final class RiftAncient implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        RiftEntities.register();
+        RiftSounds.register();
         RiftBlocks.register();
 
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
@@ -86,7 +90,7 @@ public final class RiftAncient implements ModInitializer {
                 }
             }
             if (stack.is(DAWNWAKE_BLADE) && world.getBlockState(clicked).is(RiftBlocks.TEMPLE_ALTAR)) {
-                if (world instanceof ServerLevel serverLevel && serverLevel.getEntitiesOfClass(WitherBoss.class, new net.minecraft.world.phys.AABB(clicked).inflate(48.0D)).isEmpty()) {
+                if (world instanceof ServerLevel serverLevel && serverLevel.getEntitiesOfClass(VorathEntity.class, new net.minecraft.world.phys.AABB(clicked).inflate(48.0D)).isEmpty()) {
                     if (player instanceof ServerPlayer serverPlayer) awakenVorath(serverLevel, clicked, serverPlayer);
                     if (!player.getAbilities().instabuild) stack.hurtAndBreak(1, player, hand);
                     return InteractionResult.SUCCESS;
@@ -97,12 +101,12 @@ public final class RiftAncient implements ModInitializer {
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
             if (!(entity.level() instanceof ServerLevel level) || !level.dimension().equals(AETHEL_RUINIUM)) return;
-            if (entity instanceof WitherBoss && entity.getCustomName() != null && entity.getCustomName().getString().contains("Vorath")) {
+            if (entity instanceof VorathEntity) {
                 entity.spawnAtLocation(level, new ItemStack(RUIN_HEART, 1), 0.0F);
                 level.explode(null, entity.getX(), entity.getY(), entity.getZ(), 2.5F, Level.ExplosionInteraction.TNT);
                 return;
             }
-            if (entity.getType() == EntityType.ENDERMITE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.ENDERMAN || entity.getType() == EntityType.WITHER_SKELETON) {
+            if (entity instanceof RiftStalkerEntity || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.ENDERMAN || entity.getType() == EntityType.WITHER_SKELETON) {
                 if (level.random.nextFloat() < 0.35F) entity.spawnAtLocation(level, new ItemStack(AETHERITE_SHARD, 1 + level.random.nextInt(2)), 0.0F);
             }
         });
@@ -134,7 +138,7 @@ public final class RiftAncient implements ModInitializer {
             BlockPos origin = player.blockPosition().offset(level.random.nextInt(17) - 8, 0, level.random.nextInt(17) - 8);
             if (!level.getBlockState(origin).isAir()) origin = origin.above();
             if (!level.getBlockState(origin).isAir()) continue;
-            EntityType<?> type = level.random.nextBoolean() ? EntityType.HUSK : EntityType.ENDERMITE;
+            EntityType<?> type = level.random.nextBoolean() ? EntityType.HUSK : RiftEntities.RIFT_STALKER;
             Mob mob = (Mob) type.create(level, EntitySpawnReason.NATURAL);
             if (mob == null) continue;
             mob.setPos(origin.getX() + .5, origin.getY(), origin.getZ() + .5);
@@ -146,21 +150,16 @@ public final class RiftAncient implements ModInitializer {
     }
 
     private static void awakenVorath(ServerLevel level, BlockPos altar, ServerPlayer player) {
-        WitherBoss boss = EntityType.WITHER.create(level, EntitySpawnReason.TRIGGERED);
+        VorathEntity boss = RiftEntities.VORATH.create(level, EntitySpawnReason.TRIGGERED);
         if (boss == null) return;
         boss.setPos(altar.getX() + .5, altar.getY() + 2.5, altar.getZ() + .5);
         boss.setYRot(player.getYRot());
         boss.setXRot(0);
-        boss.setCustomName(Component.literal("Vorath, the Sleeping Ruin"));
-        boss.setCustomNameVisible(true);
         boss.setPersistenceRequired();
-        var health = boss.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH);
-        if (health != null) health.setBaseValue(500.0D);
-        boss.setHealth(500.0F);
-        boss.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.RESISTANCE, 200, 1));
+        boss.beginAwakening();
         level.addFreshEntity(boss);
         level.sendParticles(net.minecraft.core.particles.ParticleTypes.EXPLOSION, boss.getX(), boss.getY() + 1.5, boss.getZ(), 12, 1.5, 1.5, 1.5, .1);
         level.sendParticles(net.minecraft.core.particles.ParticleTypes.REVERSE_PORTAL, boss.getX(), boss.getY(), boss.getZ(), 80, 2.5, 2.5, 2.5, .25);
-        level.playSound(null, altar, net.minecraft.sounds.SoundEvents.WITHER_SPAWN, net.minecraft.sounds.SoundSource.HOSTILE, 2.0F, .55F);
+        level.playSound(null, altar, net.minecraft.sounds.SoundEvents.RESPAWN_ANCHOR_CHARGE, net.minecraft.sounds.SoundSource.HOSTILE, 2.0F, .5F);
     }
 }
