@@ -1,0 +1,17 @@
+{
+  "type": "riftancient:aethel_ruinium",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "layers": [
+        {"height": 1, "block": "minecraft:bedrock"},
+        {"height": 3, "block": "riftancient:runic_bricks"},
+        {"height": 1, "block": "riftancient:ancient_riftstone"}
+      ],
+      "biome": "riftancient:aethel_ruinium",
+      "lakes": [],
+      "features": false,
+      "structure_overrides": []
+    }
+  }
+}

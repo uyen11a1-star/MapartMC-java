@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "COC",
+    "SES",
+    "COC"
+  ],
+  "key": {
+    "C": "minecraft:crying_obsidian",
+    "O": "minecraft:obsidian",
+    "S": "riftancient:aetherite_shard",
+    "E": "minecraft:echo_shard"
+  },
+  "result": {
+    "id": "riftancient:rift_sigil",
+    "count": 1
+  }
+}

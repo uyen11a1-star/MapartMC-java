@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "A",
+    "N"
+  ],
+  "key": {
+    "A": "riftancient:aetherite_ingot",
+    "N": "minecraft:netherite_sword"
+  },
+  "result": {
+    "id": "riftancient:dawnwake_blade",
+    "count": 1
+  }
+}

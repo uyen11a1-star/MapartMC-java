@@ -1,0 +1,16 @@
+{
+  "itemGroup.riftancient": "RiftAncient",
+  "block.riftancient.ancient_riftstone": "\u0110\u00e1 Khe N\u1ee9t C\u1ed5 \u0110\u1ea1i",
+  "block.riftancient.runic_bricks": "G\u1ea1ch Rune",
+  "block.riftancient.rift_portal": "C\u1ed5ng Khe N\u1ee9t",
+  "block.riftancient.aetherite_ore": "Qu\u1eb7ng Aetherite",
+  "block.riftancient.aetherite_block": "Kh\u1ed1i Aetherite",
+  "block.riftancient.temple_altar": "B\u1ec7 T\u1ebf Reliquary",
+  "item.riftancient.rift_sigil": "\u1ea4n Khe N\u1ee9t",
+  "item.riftancient.aetherite_shard": "M\u1ea3nh Aetherite",
+  "item.riftancient.aetherite_ingot": "Th\u1ecfi Aetherite",
+  "item.riftancient.dawnwake_blade": "Dawnwake Blade",
+  "item.riftancient.ruin_heart": "Tr\u00e1i Tim T\u00e0n T\u00edch",
+  "item.riftancient.severance": "Severance",
+  "dimension.riftancient.aethel_ruinium": "Aethel-Ruinium"
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "riftancient:ancient_riftstone",
+    "riftancient:runic_bricks",
+    "riftancient:aetherite_ore",
+    "riftancient:aetherite_block",
+    "riftancient:temple_altar"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "A A"
+  ],
+  "key": {
+    "A": "riftancient:aetherite_ingot"
+  },
+  "result": {
+    "id": "riftancient:aetherite_boots",
+    "count": 1
+  }
+}

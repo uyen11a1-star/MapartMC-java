@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NAN",
+    "SRS",
+    " E "
+  ],
+  "key": {
+    "N": "minecraft:nether_star",
+    "A": "riftancient:aetherite_ingot",
+    "S": "minecraft:echo_shard",
+    "R": "riftancient:ruin_heart",
+    "E": "minecraft:netherite_sword"
+  },
+  "result": {
+    "id": "riftancient:severance",
+    "count": 1
+  }
+}

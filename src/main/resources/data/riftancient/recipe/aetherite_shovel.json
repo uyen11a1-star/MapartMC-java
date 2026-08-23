@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "S",
+    "S"
+  ],
+  "key": {
+    "A": "riftancient:aetherite_ingot",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "riftancient:aetherite_shovel",
+    "count": 1
+  }
+}
