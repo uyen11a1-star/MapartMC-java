@@ -22,6 +22,23 @@ public final class RuinGenerator {
         buildAetheriteShrine(level, center.offset(0, 9, 42));
     }
 
+    public static void ensureNearbyRuin(ServerLevel level, BlockPos playerPos) {
+        int gridX = Math.floorDiv(playerPos.getX(), 64);
+        int gridZ = Math.floorDiv(playerPos.getZ(), 64);
+        for (int gx = gridX - 1; gx <= gridX + 1; gx++) {
+            for (int gz = gridZ - 1; gz <= gridZ + 1; gz++) {
+                if (gx == 0 && gz == 0) continue;
+                BlockPos base = new BlockPos(gx * 64 + 16, 5, gz * 64 + 16);
+                if (!level.getBlockState(base).isAir()) continue;
+                int type = Math.floorMod(gx * 31 + gz * 17, 3);
+                level.setBlock(base, RiftBlocks.ANCIENT_RIFTSTONE.defaultBlockState(), 3);
+                if (type == 0) buildObelisk(level, base, 7 + Math.floorMod(gx + gz, 4));
+                else if (type == 1) buildFallenArch(level, base);
+                else buildAetheriteShrine(level, base);
+            }
+        }
+    }
+
     public static void buildTemple(ServerLevel level, BlockPos center) {
         for (int x = -9; x <= 9; x++) {
             for (int z = -9; z <= 9; z++) {

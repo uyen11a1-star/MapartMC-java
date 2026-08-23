@@ -6,6 +6,9 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.world.BossEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
@@ -35,6 +38,7 @@ public final class VorathEntity extends PathfinderMob {
     private static final EntityDataAccessor<Integer> ANIMATION_TICKS = SynchedEntityData.defineId(VorathEntity.class, EntityDataSerializers.INT);
     private int runeCooldown;
     private ItemEntity ceremonialBlade;
+    private final ServerBossEvent bossBar = new ServerBossEvent(net.minecraft.network.chat.Component.literal("Vorath, the Sleeping Ruin"), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.NOTCHED_20);
 
     public VorathEntity(EntityType<? extends VorathEntity> type, Level level) {
         super(type, level);
@@ -85,6 +89,7 @@ public final class VorathEntity extends PathfinderMob {
         this.setInvulnerable(true);
         this.setCustomName(net.minecraft.network.chat.Component.literal("Vorath, the Sleeping Ruin"));
         this.setCustomNameVisible(true);
+        bossBar.setVisible(true);
         ceremonialBlade = new ItemEntity(level(), getX(), getY() + 1.2D, getZ(), new ItemStack(RiftAncient.DAWNWAKE_BLADE));
         ceremonialBlade.setNoPickUpDelay();
         ceremonialBlade.setUnlimitedLifetime();
@@ -123,6 +128,7 @@ public final class VorathEntity extends PathfinderMob {
             return;
         }
         if (getPhase() < ACTIVE) return;
+        if (!level().isClientSide()) bossBar.setProgress(Math.max(0.0F, getHealth() / getMaxHealth()));
         if (getHealth() <= getMaxHealth() * 0.35F && getPhase() != ENRAGED) {
             entityData.set(PHASE, ENRAGED);
             if (level() instanceof ServerLevel server) {
@@ -147,6 +153,25 @@ public final class VorathEntity extends PathfinderMob {
         }
         target.hurt(damageSources().mobAttack(this), getPhase() == ENRAGED ? 18.0F : 12.0F);
         server.playSound(null, blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.HOSTILE, 1.3F, .55F);
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        bossBar.addPlayer(player);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer player) {
+        super.stopSeenByPlayer(player);
+        bossBar.removePlayer(player);
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        bossBar.removeAllPlayers();
+        if (ceremonialBlade != null) ceremonialBlade.discard();
+        super.remove(reason);
     }
 
     @Override

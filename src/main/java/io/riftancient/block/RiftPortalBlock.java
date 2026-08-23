@@ -19,19 +19,25 @@ public class RiftPortalBlock extends NetherPortalBlock {
     }
 
     public static boolean createFrame(Level level, BlockPos anchor) {
+        return tryCreateFrame(level, anchor, true) || tryCreateFrame(level, anchor, false);
+    }
+
+    private static boolean tryCreateFrame(Level level, BlockPos anchor, boolean alongX) {
         int width = 4;
         int height = 5;
+        int dx = alongX ? 1 : 0;
+        int dz = alongX ? 0 : 1;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 boolean edge = x == 0 || x == width - 1 || y == 0 || y == height - 1;
-                BlockPos pos = anchor.offset(x, y, 0);
+                BlockPos pos = anchor.offset(dx * x, y, dz * x);
                 if (edge && !level.getBlockState(pos).is(RiftBlocks.ANCIENT_RIFTSTONE)) return false;
                 if (!edge && !level.getBlockState(pos).isAir()) return false;
             }
         }
         for (int x = 1; x < width - 1; x++) {
             for (int y = 1; y < height - 1; y++) {
-                level.setBlock(anchor.offset(x, y, 0), RiftBlocks.RIFT_PORTAL.defaultBlockState(), 3);
+                level.setBlock(anchor.offset(dx * x, y, dz * x), RiftBlocks.RIFT_PORTAL.defaultBlockState(), 3);
             }
         }
         return true;

@@ -92,7 +92,7 @@ public final class RiftAncient implements ModInitializer {
             if (stack.is(DAWNWAKE_BLADE) && world.getBlockState(clicked).is(RiftBlocks.TEMPLE_ALTAR)) {
                 if (world instanceof ServerLevel serverLevel && serverLevel.getEntitiesOfClass(VorathEntity.class, new net.minecraft.world.phys.AABB(clicked).inflate(48.0D)).isEmpty()) {
                     if (player instanceof ServerPlayer serverPlayer) awakenVorath(serverLevel, clicked, serverPlayer);
-                    if (!player.getAbilities().instabuild) stack.hurtAndBreak(1, player, hand);
+                    if (!player.getAbilities().instabuild) stack.shrink(1);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -113,14 +113,20 @@ public final class RiftAncient implements ModInitializer {
 
         ServerTickEvents.END_WORLD_TICK.register(level -> {
             if (!level.dimension().equals(AETHEL_RUINIUM)) return;
-            if (level.getGameTime() % 200L == 0L) RuinGenerator.ensureTemple(level);
+            if (level.getGameTime() % 200L == 0L) {
+                RuinGenerator.ensureTemple(level);
+                for (ServerPlayer player : level.players()) RuinGenerator.ensureNearbyRuin(level, player.blockPosition());
+            }
             if (level.getGameTime() % 100L == 0L) spawnRiftHostiles(level);
             for (ServerPlayer player : level.players()) {
-                if (level.getGameTime() % 40L == 0L && player.getY() > 70) {
+                if (level.getGameTime() % 40L == 0L) {
                     boolean fullAetherite = player.getItemBySlot(EquipmentSlot.HEAD).is(AETHERITE_HELMET) && player.getItemBySlot(EquipmentSlot.CHEST).is(AETHERITE_CHESTPLATE) && player.getItemBySlot(EquipmentSlot.LEGS).is(AETHERITE_LEGGINGS) && player.getItemBySlot(EquipmentSlot.FEET).is(AETHERITE_BOOTS);
                     if (fullAetherite) {
                         player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.RESISTANCE, 60, 0, true, false));
                         player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.NIGHT_VISION, 220, 0, true, false));
+                    }
+                    if (isAetheriteTool(player.getMainHandItem())) {
+                        player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.HASTE, 60, 0, true, false));
                     }
                 }
                 if (level.getGameTime() % 5L == 0L && player.getMainHandItem().is(SEVERANCE)) {
@@ -130,6 +136,10 @@ public final class RiftAncient implements ModInitializer {
         });
 
         LOGGER.info("{} initialized — welcome to Aethel-Ruinium", DISPLAY_NAME);
+    }
+
+    private static boolean isAetheriteTool(ItemStack stack) {
+        return stack.is(AETHERITE_PICKAXE) || stack.is(AETHERITE_AXE) || stack.is(AETHERITE_SHOVEL) || stack.is(AETHERITE_HOE);
     }
 
     private static void spawnRiftHostiles(ServerLevel level) {
