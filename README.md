@@ -1,6 +1,6 @@
 # RiftAncient.mod
 
-**RiftAncient.mod 1.1.0** là mod Fabric cho **Minecraft Java 1.21.10**, được tạo bởi **nguyenquochuy**. Mod mở ra chiều không gian cổ đại **Aethel-Ruinium**, nơi đền thờ bị xé nát bởi khe nứt thời không, các obelisk trôi giữa đá rune và những sinh vật canh giữ lõi Aetherite.
+**RiftAncient.mod 1.2.0** là mod Fabric cho **Minecraft Java 1.21.10**, được tạo bởi **nguyenquochuy**. Mod mở ra chiều không gian cổ đại **Aethel-Ruinium**, nơi đền thờ bị xé nát bởi khe nứt thời không, các obelisk trôi giữa đá rune và những sinh vật canh giữ lõi Aetherite.
 
 ## Yêu cầu
 
@@ -12,7 +12,7 @@
 | Java | 21 trở lên |
 | License | MIT |
 
-Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.1.0.jar` vào thư mục `mods`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
+Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.2.0.jar` vào thư mục `mods`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
 
 ## Mở cổng Rift
 
@@ -40,11 +40,11 @@ Bộ giáp Aetherite và các công cụ Aetherite có texture riêng. Khi mặc
 
 ## Tài nguyên hình ảnh và âm thanh
 
-Texture entity Vorath, Rift Stalker và rune glow nằm trong `assets/riftancient/textures/entity/`. Concept art cổ đại nằm trong `art/`. Ambience Aethel-Ruinium nằm trong `assets/riftancient/sounds/aethel_ambient.ogg` và được gọi qua `sounds.json`.
+Texture entity Vorath, Rift Stalker và rune glow nằm trong `assets/riftancient/textures/entity/`. Rig 3D chi tiết tương thích Blockbench nằm tại `models/blockbench/vorath.bbmodel`, gồm thân giáp, ba mặt nạ, sừng, vai giáp, cánh phân đoạn, chân giáp, lõi và vòng rune. Concept art cổ đại nằm trong `art/`. Ambience Aethel-Ruinium nằm trong `assets/riftancient/sounds/aethel_ambient.ogg` và được gọi qua `sounds.json`.
 
 ## Ghi chú phát hành
 
-Bản 1.1.0 là bản nâng cấp gameplay và trình bày từ prototype 1.0.0. Nên sao lưu world trước khi thử chiều không gian hoặc nghi thức boss. Mod không phải sản phẩm của Mojang và không được Mojang phê duyệt hay liên kết.
+Bản 1.2.0 là bản nâng cấp model Vorath, rig Blockbench-compatible, animation thức tỉnh và trình bày từ bản 1.1.0. Nên sao lưu world trước khi thử chiều không gian hoặc nghi thức boss. Mod không phải sản phẩm của Mojang và không được Mojang phê duyệt hay liên kết.
 
 ## Tác giả và giấy phép
 
