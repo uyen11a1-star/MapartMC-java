@@ -12,7 +12,7 @@
 | Java | 21 trở lên |
 | License | MIT |
 
-Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.2.2.jar` vào thư mục `mods`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
+Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.2.2.jar` vào thư mục `mods`. Vào Creative Inventory và chọn tab **RiftAncient** để thấy toàn bộ item/block; ô tìm kiếm có thể dùng các ID như `riftancient:rift_sigil`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
 
 ## Mở cổng Rift
 

@@ -31,6 +31,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -59,6 +60,33 @@ public final class RiftAncient implements ModInitializer {
     public static final Item AETHERITE_AXE = registerItem("aetherite_axe", new Item(itemProperties("aetherite_axe").axe(ToolMaterial.NETHERITE, 7.0F, -2.8F)));
     public static final Item AETHERITE_SHOVEL = registerItem("aetherite_shovel", new Item(itemProperties("aetherite_shovel").shovel(ToolMaterial.NETHERITE, 3.0F, -3.0F)));
     public static final Item AETHERITE_HOE = registerItem("aetherite_hoe", new Item(itemProperties("aetherite_hoe").hoe(ToolMaterial.NETHERITE, 0.0F, -3.0F)));
+
+    public static final CreativeModeTab RIFT_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, id("rift_tab"), CreativeModeTab.builder(CreativeModeTab.Row.TOP, 7)
+            .title(Component.translatable("itemGroup.riftancient"))
+            .icon(() -> new ItemStack(RIFT_SIGIL))
+            .displayItems((parameters, output) -> {
+                output.accept(RIFT_SIGIL);
+                output.accept(AETHERITE_SHARD);
+                output.accept(AETHERITE_INGOT);
+                output.accept(DAWNWAKE_BLADE);
+                output.accept(RUIN_HEART);
+                output.accept(SEVERANCE);
+                output.accept(AETHERITE_HELMET);
+                output.accept(AETHERITE_CHESTPLATE);
+                output.accept(AETHERITE_LEGGINGS);
+                output.accept(AETHERITE_BOOTS);
+                output.accept(AETHERITE_PICKAXE);
+                output.accept(AETHERITE_AXE);
+                output.accept(AETHERITE_SHOVEL);
+                output.accept(AETHERITE_HOE);
+                output.accept(RiftBlocks.ANCIENT_RIFTSTONE.asItem());
+                output.accept(RiftBlocks.RUNIC_BRICKS.asItem());
+                output.accept(RiftBlocks.RIFT_PORTAL.asItem());
+                output.accept(RiftBlocks.AETHERITE_ORE.asItem());
+                output.accept(RiftBlocks.AETHERITE_BLOCK.asItem());
+                output.accept(RiftBlocks.TEMPLE_ALTAR.asItem());
+            })
+            .build());
 
     private static Item.Properties itemProperties(String name) {
         return new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id(name)));
