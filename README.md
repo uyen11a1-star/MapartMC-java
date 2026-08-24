@@ -7,12 +7,12 @@
 | Thành phần | Phiên bản |
 | --- | --- |
 | Minecraft Java | 1.21.10 |
-| Mod loader | Fabric Loader 0.19.3 trở lên |
+| Mod loader | Fabric Loader 0.18.4 trở lên |
 | Thư viện | Fabric API 0.138.4+1.21.10 trở lên |
 | Java | 21 trở lên |
 | License | MIT |
 
-Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.2.1.jar` vào thư mục `mods`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
+Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.2.2.jar` vào thư mục `mods`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
 
 ## Mở cổng Rift
 
@@ -44,7 +44,7 @@ Texture entity Vorath, Rift Stalker và rune glow nằm trong `assets/riftancien
 
 ## Ghi chú phát hành
 
-Bản 1.2.1 là bản hoàn thiện gameplay từ 1.2.0: sửa điều kiện hiệu ứng giáp, thêm boss bar, cổng đa hướng, di tích sinh theo vùng, Haste cho công cụ và texture UV Vorath 64×96 đúng với model. Nên sao lưu world trước khi thử chiều không gian hoặc nghi thức boss. Mod không phải sản phẩm của Mojang và không được Mojang phê duyệt hay liên kết.
+Bản 1.2.2 giữ toàn bộ tính năng 1.2.1 và đổi Fabric Loader tương thích xuống 0.18.4 theo yêu cầu; Fabric API vẫn là `0.138.4+1.21.10`. Nên sao lưu world trước khi thử chiều không gian hoặc nghi thức boss. Mod không phải sản phẩm của Mojang và không được Mojang phê duyệt hay liên kết.
 
 ## Tác giả và giấy phép
 
