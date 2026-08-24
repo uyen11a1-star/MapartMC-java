@@ -16,7 +16,7 @@ Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https
 
 ## Mở cổng Rift
 
-Dựng khung cổng rộng 4 block và cao 5 block bằng **Ancient Riftstone**, để trống phần trong; khung có thể quay theo cả hai hướng X hoặc Z. Cầm **Rift Sigil** rồi tương tác với block Ancient Riftstone ở góc dưới bên trái của khung. Cổng sẽ tạo mặt rift tím-cyan và cho phép đi hai chiều giữa Overworld và Aethel-Ruinium.
+Dựng khung cổng rộng 4 block và cao 5 block bằng **Ancient Riftstone**, để trống phần trong; khung có thể quay theo cả hai hướng X hoặc Z. Cầm **Rift Sigil** rồi tương tác với bất kỳ block Ancient Riftstone nào trên viền khung. Cổng sẽ tạo mặt rift tím-cyan và cho phép đi hai chiều giữa Overworld và Aethel-Ruinium.
 
 ## Aethel-Ruinium
 
