@@ -9,6 +9,16 @@ import net.minecraft.world.level.block.Blocks;
 public final class RuinGenerator {
     private RuinGenerator() {}
 
+    public static void ensureSpawnPlatform(ServerLevel level, BlockPos center) {
+        for (int x = -16; x <= 16; x++) {
+            for (int z = -16; z <= 16; z++) {
+                if (Math.sqrt(x * x + z * z) <= 16) {
+                    level.setBlock(center.offset(x, -1, z), RiftBlocks.RUNIC_BRICKS.defaultBlockState(), 3);
+                }
+            }
+        }
+    }
+
     public static void ensureTemple(ServerLevel level) {
         BlockPos spawn = level.getRespawnData().pos();
         int baseY = Math.max(5, spawn.getY());

@@ -27,7 +27,9 @@ public final class RiftBlocks {
 
     private static Block register(String name, Block block) {
         Block registered = Registry.register(BuiltInRegistries.BLOCK, RiftAncient.id(name), block);
-        Registry.register(BuiltInRegistries.ITEM, RiftAncient.id(name), new BlockItem(registered, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, RiftAncient.id(name)))));
+        if (!name.equals("rift_portal")) {
+            Registry.register(BuiltInRegistries.ITEM, RiftAncient.id(name), new BlockItem(registered, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, RiftAncient.id(name)))));
+        }
         return registered;
     }
 

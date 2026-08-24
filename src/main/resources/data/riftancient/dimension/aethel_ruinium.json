@@ -9,7 +9,7 @@
         {"height": 1, "block": "riftancient:ancient_riftstone"}
       ],
       "biome": "riftancient:aethel_ruinium",
-      "lakes": [],
+      "lakes": false,
       "features": false,
       "structure_overrides": []
     }

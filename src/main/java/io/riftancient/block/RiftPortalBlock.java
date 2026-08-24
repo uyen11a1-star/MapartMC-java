@@ -1,6 +1,7 @@
 package io.riftancient.block;
 
 import io.riftancient.RiftAncient;
+import io.riftancient.world.RuinGenerator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -18,8 +19,14 @@ public class RiftPortalBlock extends NetherPortalBlock {
         super(properties);
     }
 
-    public static boolean createFrame(Level level, BlockPos anchor) {
-        return tryCreateFrame(level, anchor, true) || tryCreateFrame(level, anchor, false);
+    public static boolean createFrame(Level level, BlockPos clicked) {
+        for (int xOffset = -3; xOffset <= 0; xOffset++) {
+            for (int yOffset = -4; yOffset <= 0; yOffset++) {
+                if (tryCreateFrame(level, clicked.offset(xOffset, yOffset, 0), true)) return true;
+                if (tryCreateFrame(level, clicked.offset(0, yOffset, xOffset), false)) return true;
+            }
+        }
+        return false;
     }
 
     private static boolean tryCreateFrame(Level level, BlockPos anchor, boolean alongX) {
@@ -52,8 +59,15 @@ public class RiftPortalBlock extends NetherPortalBlock {
     public TeleportTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
         ServerLevel destination = level.getServer().getLevel(level.dimension().equals(RiftAncient.AETHEL_RUINIUM) ? Level.OVERWORLD : RiftAncient.AETHEL_RUINIUM);
         if (destination == null) return null;
-        BlockPos spawn = destination.getRespawnData().pos().above(2);
-        return new TeleportTransition(destination, Vec3.atBottomCenterOf(spawn), Vec3.ZERO, entity.getYRot(), entity.getXRot(), TeleportTransition.PLACE_PORTAL_TICKET);
+        BlockPos spawn = destination.getRespawnData().pos();
+        if (destination.dimension().equals(RiftAncient.AETHEL_RUINIUM)) {
+            spawn = new BlockPos(0, 5, 0);
+            RuinGenerator.ensureSpawnPlatform(destination, spawn);
+            RuinGenerator.ensureTemple(destination);
+        }
+        BlockPos safeBlock = destination.getWorldBorder().clampToBounds(spawn.getX(), spawn.getY(), spawn.getZ());
+        Vec3 safeSpawn = Vec3.atBottomCenterOf(safeBlock.above());
+        return new TeleportTransition(destination, safeSpawn, Vec3.ZERO, entity.getYRot(), entity.getXRot(), TeleportTransition.PLACE_PORTAL_TICKET);
     }
 
     @Override

@@ -81,7 +81,6 @@ public final class RiftAncient implements ModInitializer {
                 output.accept(AETHERITE_HOE);
                 output.accept(RiftBlocks.ANCIENT_RIFTSTONE.asItem());
                 output.accept(RiftBlocks.RUNIC_BRICKS.asItem());
-                output.accept(RiftBlocks.RIFT_PORTAL.asItem());
                 output.accept(RiftBlocks.AETHERITE_ORE.asItem());
                 output.accept(RiftBlocks.AETHERITE_BLOCK.asItem());
                 output.accept(RiftBlocks.TEMPLE_ALTAR.asItem());
