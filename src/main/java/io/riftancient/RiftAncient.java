@@ -6,6 +6,7 @@ import io.riftancient.entity.RiftEntities;
 import io.riftancient.entity.RiftStalkerEntity;
 import io.riftancient.entity.VorathEntity;
 import io.riftancient.item.RiftSeveranceItem;
+import io.riftancient.item.RiftSigilItem;
 import io.riftancient.world.RuinGenerator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
@@ -45,7 +46,7 @@ public final class RiftAncient implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final ResourceKey<Level> AETHEL_RUINIUM = ResourceKey.create(Registries.DIMENSION, id("aethel_ruinium"));
 
-    public static final Item RIFT_SIGIL = registerItem("rift_sigil", new Item(itemProperties("rift_sigil").stacksTo(16)));
+    public static final Item RIFT_SIGIL = registerItem("rift_sigil", new RiftSigilItem(itemProperties("rift_sigil").stacksTo(16)));
     public static final Item AETHERITE_SHARD = registerItem("aetherite_shard", new Item(itemProperties("aetherite_shard")));
     public static final Item AETHERITE_INGOT = registerItem("aetherite_ingot", new Item(itemProperties("aetherite_ingot")));
     public static final Item DAWNWAKE_BLADE = registerItem("dawnwake_blade", new Item(itemProperties("dawnwake_blade").stacksTo(1).sword(ToolMaterial.NETHERITE, 5.0F, -2.4F)));
@@ -109,13 +110,6 @@ public final class RiftAncient implements ModInitializer {
             if (world.isClientSide()) return InteractionResult.PASS;
             BlockPos clicked = hitResult.getBlockPos();
             ItemStack stack = player.getItemInHand(hand);
-            if (stack.is(RIFT_SIGIL) && world.getBlockState(clicked).is(RiftBlocks.ANCIENT_RIFTSTONE)) {
-                if (RiftPortalBlock.createFrame(world, clicked)) {
-                    if (!player.getAbilities().instabuild) stack.shrink(1);
-                    world.levelEvent(2001, clicked, 0);
-                    return InteractionResult.SUCCESS;
-                }
-            }
             if (stack.is(DAWNWAKE_BLADE) && world.getBlockState(clicked).is(RiftBlocks.TEMPLE_ALTAR)) {
                 if (world instanceof ServerLevel serverLevel && serverLevel.getEntitiesOfClass(VorathEntity.class, new net.minecraft.world.phys.AABB(clicked).inflate(48.0D)).isEmpty()) {
                     if (player instanceof ServerPlayer serverPlayer) awakenVorath(serverLevel, clicked, serverPlayer);

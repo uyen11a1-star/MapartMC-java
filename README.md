@@ -1,6 +1,6 @@
 # RiftAncient.mod
 
-**RiftAncient.mod 1.3.0** là mod Fabric cho **Minecraft Java 1.21.10**, được tạo bởi **nguyenquochuy**. Mod mở ra chiều không gian cổ đại **Aethel-Ruinium**, nơi đền thờ bị xé nát bởi khe nứt thời không, các obelisk trôi giữa đá rune và những sinh vật canh giữ lõi Aetherite.
+**RiftAncient.mod 1.4.0** là mod Fabric cho **Minecraft Java 1.21.10**, được tạo bởi **nguyenquochuy**. Mod mở ra chiều không gian cổ đại **Aethel-Ruinium**, nơi đền thờ bị xé nát bởi khe nứt thời không, các obelisk trôi giữa đá rune và những sinh vật canh giữ lõi Aetherite.
 
 ## Yêu cầu
 
@@ -12,7 +12,7 @@
 | Java | 21 trở lên |
 | License | MIT |
 
-Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.3.0.jar` vào thư mục `mods`. Vào Creative Inventory và chọn tab **RiftAncient** để thấy toàn bộ item/block; ô tìm kiếm có thể dùng các ID như `riftancient:rift_sigil`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
+Cài [Fabric Loader](https://fabricmc.net/use/installer/) và [Fabric API](https://modrinth.com/mod/fabric-api), sau đó đặt `RiftAncient-1.4.0.jar` vào thư mục `mods`. Vào Creative Inventory và chọn tab **RiftAncient** để thấy toàn bộ item/block; ô tìm kiếm có thể dùng các ID như `riftancient:rift_sigil`. Đây là mod dành cho Java Edition; không cài trên Bedrock Edition.
 
 ## Mở cổng Rift
 
@@ -44,7 +44,7 @@ Texture entity Vorath, Rift Stalker và rune glow nằm trong `assets/riftancien
 
 ## Ghi chú phát hành
 
-Bản 1.3.0 sửa triệt để inventory texture, đăng ký Creative Tab RiftAncient, schema generator flat, điểm spawn an toàn, tìm khung cổng từ mọi block góc và loại bỏ tình trạng chiều không gian trống/void. Bản dùng Fabric Loader 0.18.4 và Fabric API `0.138.4+1.21.10`. Nên sao lưu world trước khi thử chiều không gian hoặc nghi thức boss. Mod không phải sản phẩm của Mojang và không được Mojang phê duyệt hay liên kết.
+Bản 1.4.0 sửa missing texture trong inventory bằng item model definitions chuẩn Minecraft 1.21.10, chuyển Rift Sigil sang item tương tác trực tiếp, mở rộng dò khung portal, sửa schema generator flat và tạo nền spawn an toàn trước khi teleport. Bản dùng Fabric Loader 0.18.4 và Fabric API `0.138.4+1.21.10`. Nên sao lưu world trước khi thử chiều không gian hoặc nghi thức boss. Mod không phải sản phẩm của Mojang và không được Mojang phê duyệt hay liên kết.
 
 ## Tác giả và giấy phép
 

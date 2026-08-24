@@ -20,8 +20,8 @@ public class RiftPortalBlock extends NetherPortalBlock {
     }
 
     public static boolean createFrame(Level level, BlockPos clicked) {
-        for (int xOffset = -3; xOffset <= 0; xOffset++) {
-            for (int yOffset = -4; yOffset <= 0; yOffset++) {
+        for (int xOffset = -22; xOffset <= 0; xOffset++) {
+            for (int yOffset = -22; yOffset <= 0; yOffset++) {
                 if (tryCreateFrame(level, clicked.offset(xOffset, yOffset, 0), true)) return true;
                 if (tryCreateFrame(level, clicked.offset(0, yOffset, xOffset), false)) return true;
             }
@@ -30,10 +30,14 @@ public class RiftPortalBlock extends NetherPortalBlock {
     }
 
     private static boolean tryCreateFrame(Level level, BlockPos anchor, boolean alongX) {
-        int width = 4;
-        int height = 5;
         int dx = alongX ? 1 : 0;
         int dz = alongX ? 0 : 1;
+        if (!level.getBlockState(anchor).is(RiftBlocks.ANCIENT_RIFTSTONE)) return false;
+        int width = 1;
+        while (width < 23 && level.getBlockState(anchor.offset(dx * width, 0, dz * width)).is(RiftBlocks.ANCIENT_RIFTSTONE)) width++;
+        int height = 1;
+        while (height < 23 && level.getBlockState(anchor.above(height)).is(RiftBlocks.ANCIENT_RIFTSTONE)) height++;
+        if (width < 4 || height < 5) return false;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 boolean edge = x == 0 || x == width - 1 || y == 0 || y == height - 1;

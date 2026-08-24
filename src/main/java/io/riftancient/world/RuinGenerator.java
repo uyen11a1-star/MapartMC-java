@@ -20,9 +20,8 @@ public final class RuinGenerator {
     }
 
     public static void ensureTemple(ServerLevel level) {
-        BlockPos spawn = level.getRespawnData().pos();
-        int baseY = Math.max(5, spawn.getY());
-        BlockPos center = new BlockPos(spawn.getX(), baseY, spawn.getZ());
+        BlockPos center = new BlockPos(0, 5, 0);
+        ensureSpawnPlatform(level, center);
         if (!level.getBlockState(center).isAir() && !level.getBlockState(center).is(RiftBlocks.TEMPLE_ALTAR)) return;
         buildTemple(level, center);
         buildObelisk(level, center.offset(28, 7, -18), 9);
